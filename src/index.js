@@ -18,20 +18,15 @@ const store = createStore(reducers, compose(
   applyMiddleware(thunk),
   reduxDevtools()
 ))
-function render(){
-  return ReactDOM.render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <Switch>
-          <Route path='/login' component={Auth}></Route>
-          <Route path='/dashboard' component={Dashboard}></Route>
-          <Redirect to="/dashboard"></Redirect>
-        </Switch>
-      </BrowserRouter>
-    </Provider>
-    , document.getElementById('root')
-  )
-}
-
-render()
-store.subscribe(render)
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        <Route path='/login' component={Auth}></Route>
+        <Route path='/dashboard' component={Dashboard}></Route>
+        <Redirect to="/dashboard"></Redirect>
+      </Switch>
+    </BrowserRouter>
+  </Provider>
+  , document.getElementById('root')
+)
