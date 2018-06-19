@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from 'antd-mobile'
 import { changeName } from './auth.redux'
+import axios from 'axios'
 
 //导入connect
 import { connect } from 'react-redux'
@@ -13,6 +14,13 @@ import { connect } from 'react-redux'
 class Dashboard extends React.Component{
   componentDidMount(){
     console.log(this);
+    axios.get('/data')
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch(function (error) {
+        console.log(error);
+    });
   }
   render(){
     return (

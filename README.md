@@ -89,14 +89,15 @@
 })
 `
 3. nodemon插件热加载插件(只需要刷新页面,不需要重新在node环境中运行文件),使用nodemon server.js来启动项目
+4. 安装cookies插件 cookie-parse --save
 
-### mongodb
+### mongodb数据库
 - 1. 在windows下安装MongoDB,MongoDB默认连接在mongodb://127.0.0.1:27017
 - "C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath C:\Users\29984\Documents\mongodb\data (定义数据存放的目录)
 - "C:\Program Files\MongoDB\Server\3.6\bin\mongo.exe" (开启mongo服务)
 - 2. 安装mongoose用于连接MongoDB和nodejs npm install mongoose
 
-### mongoose
+### mongoose连接数据库插件
 `
   const mongoose = require('mongoose')
   const DB_URL = 'mongodb://localhost:27017/imooc'
