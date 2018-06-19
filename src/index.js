@@ -8,6 +8,10 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import reducers from './reducer'
 import './config'
 
+//导入组件
+import Login from 'container/login/login.jsx'
+import Register from 'container/register/register.jsx'
+
 const reduxDevtools = window.devToolsExtension?window.devToolsExtension:()=>{}
 const store = createStore(reducers, compose(
   applyMiddleware(thunk),
@@ -17,7 +21,13 @@ const store = createStore(reducers, compose(
 ReactDOM.render(
   (
     <Provider store={store}>
-      <BrowserRouter></BrowserRouter>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/login" component={Login}></Route>
+          <Route path="/register" component={Register}></Route>
+        </Switch>
+
+      </BrowserRouter>
     </Provider>
   ),
   document.getElementById('root')
