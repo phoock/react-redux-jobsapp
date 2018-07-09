@@ -19,7 +19,7 @@
 
 ### redux
 1. 安装redux
-  - 创建reducer,tore
+  - 创建reducer,store
   - 手动连接redux和react 使用store.subscribe(render)  function render(){return ReactDOM.render(<App>,domEle)}
   - index.redux.js文件里 使用action创建函数
   - 在dashboard里测试改变state
@@ -47,6 +47,11 @@
   `
 
 3. redux devtools
+    Chrome地址（360极速模式也可以用）： 
+    https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+
+    火狐地址：
+    https://addons.mozilla.org/en-US/firefox/addon/remotedev/
   - 通过chrome store安装(需要网络代理)
   - npm install --save-dev redux-devtools-extension通过npm安装
   - 使用方法
@@ -109,3 +114,49 @@
 1. 创建对象,链接mongdb
 2. 用const User = mongoose.model('user', new mongoose.Schema({})) 创建模型
 3. 用User.create||remove||upload||(find||findOne) 来增删改查
+4. 当需要拿到User.create中的_id时,可以使用另一种添加方式:
+`
+  const newModel = new User({'user':'xxx'}) //如果不输入则返回_id,输入了则返回_id加输入内容
+  newModel.save(function(err,data){
+    if(!err){
+      const {_id,user} = data //这里就拿到了_id,此时的data和newModel有同样的返回值
+    }
+  })
+  //这才是最传统的添加方式,新建model实例,然后save
+`
+5. findByIdAndUpdate通过id查询,并修改
+  model.findByIdAndUpdate(_id,{name:'phoock'},function(){})
+
+
+
+
+### 开发过程中添加的新插件
+1. cookie-parser app.use(cookieParser()) 没这个中间件,我们是不能通过req.cookies取回cookies的值
+2. body-parser app.use(bodyParser.json())
+3. utility     const utility = require('utility'); utility.md5('123')
+4. prop-types react@16以后分离出来的插件,用于验证props里的数据类型
+5. browser-cookies (npm install browser-cookies) 方便设置cookies的属性
+
+
+### 密码加密存储
+1. 使用MD5加密并不安全,所以采用双MD5+盐的方式来处理
+2. function md5Pwd(pwd){
+  const salt = 'imooc_is_good_33838vphocE@123~~GGG';
+  retuan utility.md5(utility.md5(pwd+salt))
+}
+
+### socket.io
+1. 安装服务端库socket.io   安装客户端库socket.io-client
+2. 将socket.io和express关联
+`
+  const app = express()
+  const server = require('http').Server(app)
+  const io = require('socket.io').(server)
+  server.listen(9093,function(){
+    console.log('...')
+  })
+`
+3. 客户端import io from 'socket.io-client'
+`
+  io('ws://localhost:3001')  //与服务器建立websocket链接
+`

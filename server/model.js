@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 //链接mongo 并使用imooc这个集合
 const DB_URL = 'mongodb://localhost:27017/imooc2'
 mongoose.connect(DB_URL)
@@ -16,12 +15,17 @@ const models = {
     //职位名
     'title':{'type':String},
     //如果你是boss 还有两个字段
-    'company':{'type':String},
+    'compony':{'type':String},
     'money':{'type':String}
   },
   chat:{
-
-  }
+		'chatid':{'type':String, require:true},
+		'from':{'type':String,'require':true},
+		'to':{'type':String,'require':true},
+		'read':{'type':Boolean,default:false},
+		'content':{'type':String,'require':true,'default':''},
+		'create_time':{'type':Number,'default':Date.now}
+	}
 }
 
 for(let m in models){

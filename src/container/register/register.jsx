@@ -1,6 +1,7 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 import Logo from 'component/logo/logo.jsx'
-import { List, InputItem, WingBlank, WhiteSpace, Button, Radio} from 'antd-mobile'
+import { List, InputItem, WhiteSpace, Button, Radio} from 'antd-mobile'
 import { connect } from 'react-redux'
 import { register } from 'reduxs/user.redux.js'
 @connect(
@@ -18,6 +19,9 @@ class Register extends React.Component{
     }
     this.handleRegister = this.handleRegister.bind(this)
   }
+  componentDidMount(){
+    console.log(this);
+  }
   handleChange(key,val){
     this.setState({
       [key]:val
@@ -30,6 +34,7 @@ class Register extends React.Component{
     const RadioItem = Radio.RadioItem
     return (
       <div>
+        {this.props.redirectTo?<Redirect to={this.props.redirectTo}></Redirect>:null}
         <Logo></Logo>
         <List>
           {this.props.msg?<p className="error-msg">{this.props.msg}</p>:null}
